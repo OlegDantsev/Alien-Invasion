@@ -4,12 +4,12 @@ from pygame.sprite import Sprite
 class Bullet(Sprite):
     #Класс для управления пулями, выпущенных кораблем
     def __init__(self, ai_settings, screen, ship):
-        super().__init__()
+        super(Bullet, self).__init__()
         self.screen = screen
 
         #Создание пули в позиции (0, 0), и назначение правильной позиции
         self.rect = pygame.Rect(0,0, ai_settings.bullet_width,
-                                 ai_settings.bullet_height)
+            ai_settings.bullet_height)
         self.rect.centerx = ship.rect.centerx
         self.rect.top = ship.rect.top
 
