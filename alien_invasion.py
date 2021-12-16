@@ -26,4 +26,5 @@ def run_game():
         bullets.update()
         gf.update_screen(ai_settings, screen, ship, bullets)
 
+
 run_game()
