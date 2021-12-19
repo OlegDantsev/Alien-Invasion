@@ -5,7 +5,7 @@ from alien import Alien
 from time import sleep
 
 
-def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
+def ship_hit(ai_settings, screen, stats, ship, aliens, bullets):
 
     # Обрабатывает столкновение корабля с пришельцем
     if stats.ship_left > 0:
@@ -231,13 +231,13 @@ def change_fleet_direction(ai_settings, aliens):
     ai_settings.fleet_direction *= -1
 
 
-def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+def check_aliens_bottom(ai_settings, screen, stats, ship, aliens, bullets):
 
     # Проверяет добрались ли пришельцы до нижней части экрана
     screen_rect = screen.get_rect()
     for alien in aliens.sprites():
         if alien.rect.bottom >= screen_rect.bottom:
-            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            ship_hit(ai_settings, screen, stats, ship, aliens, bullets)
             break
 
 
@@ -249,15 +249,15 @@ def check_high_score(stats, sb):
         sb.prep_high_score()
 
 
-def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
+def update_aliens(ai_settings, screen, stats, ship, aliens, bullets):
 
     # Проверяет достиг ли пришелец края экрана, после чего обновляет позицию
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
 
     # Проверка пришельцев добравшихся до нижнего края экрана
-    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
+    check_aliens_bottom(ai_settings, screen, stats, ship, aliens, bullets)
 
     # Проверка коллизий корабль-пришельцы
     if pygame.sprite.spritecollideany(ship, aliens):
-        ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+        ship_hit(ai_settings, screen, stats, ship, aliens, bullets)
