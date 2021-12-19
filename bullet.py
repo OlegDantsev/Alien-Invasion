@@ -3,6 +3,7 @@ from pygame.sprite import Sprite
 
 
 class Bullet(Sprite):
+
     # Класс для управления пулями, выпущенных кораблем
     def __init__(self, ai_settings, screen, ship):
         super(Bullet, self).__init__()
@@ -20,8 +21,10 @@ class Bullet(Sprite):
         self.color = ai_settings.bullet_color
         self.speed_factor = ai_settings.bullet_speed_factor
 
-    # Перемещает пулю по экрану
+
     def update(self):
+
+        # Перемещает пулю по экрану
         # Обновление позиции пули в вещественном формате
         self.y -= self.speed_factor
         # Обновление позиции прямоугольника
@@ -30,4 +33,3 @@ class Bullet(Sprite):
     def draw_bullet(self):
         # Вывод пули на экран
         pygame.draw.rect(self.screen, self.color, self.rect)
-
