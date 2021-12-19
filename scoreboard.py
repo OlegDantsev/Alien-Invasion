@@ -22,7 +22,8 @@ class ScoreBoard():
     def prep_score(self):
 
         # Преобразует текущий счет в изображение
-        score_str = str(self.stats.score)
+        rounded_score = int(round(self.stats.score, -1))
+        score_str = "{:,}".format(rounded_score)
         self.score_image = self.font.render(score_str, True, self.text_color,
                                             self.ai_settings.bg_color)
         # Вывод счета в правой верхней части экрана

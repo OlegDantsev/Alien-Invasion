@@ -123,12 +123,16 @@ def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
     pygame.display.flip()
 
 
-def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
+def check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens,
+                                  bullets):
 
     # Проверка попаданий в пришельцев
     # При обнаружении попадания удалить пулю
     collisions = pygame.sprite.groupcollide(bullets, aliens, True, True)
-
+    if collisions:
+        for aliens in collisions.values():
+            stats.score += ai_settings.alien_points * len(aliens)
+        sb.prep_score()
     # Проверка того, что флот пришельцев уничтожен и создание нового
     if len(aliens) == 0:
         # Уничтожение пуль, повышение скорости, создание нового флота
@@ -137,7 +141,7 @@ def check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets):
         create_fleet(ai_settings, screen, ship, aliens)
 
 
-def update_bullet(ai_settings, screen, ship, aliens, bullets):
+def update_bullet(ai_settings, screen, stats, sb, ship, aliens, bullets):
 
     # Обновляет позицию пуль и уничтожает старые пули
     bullets.update()
@@ -147,7 +151,8 @@ def update_bullet(ai_settings, screen, ship, aliens, bullets):
         if bullet.rect.bottom <= 0:
             bullets.remove(bullet)
 
-    check_bullet_alien_collisions(ai_settings, screen, ship, aliens, bullets)
+    check_bullet_alien_collisions(ai_settings, screen, stats, sb, ship, aliens,
+                                  bullets)
 
 
 def get_number_aliens_x(ai_settings, alien_width):
