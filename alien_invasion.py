@@ -5,6 +5,7 @@ import game_functions as gf
 from pygame.sprite import Group
 from game_stats import GameStats
 from button import Button
+from scoreboard import ScoreBoard
 
 
 def run_game():
@@ -29,14 +30,15 @@ def run_game():
 
     # Создание флота пришельцев
     gf.create_fleet(ai_settings, screen, ship, aliens)
-
+    # Создание экземпляра GameStats и ScoreBoard
     stats = GameStats(ai_settings)
+    sb = ScoreBoard(ai_settings, screen, stats)
 
     # Запуск основного цикла игры
     while True:
         gf.check_events(ai_settings, screen, stats, play_button, ship, aliens,
                         bullets)
-        gf.update_screen(ai_settings, screen, stats, ship, aliens, bullets,
+        gf.update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
                          play_button)
 
         if stats.game_active:

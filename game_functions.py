@@ -100,7 +100,7 @@ def check_play_button(ai_settings, screen, stats, play_button, ship, aliens,
             ship.center_ship()
 
 
-def update_screen(ai_settings, screen, stats, ship, aliens, bullets,
+def update_screen(ai_settings, screen, stats, sb, ship, aliens, bullets,
                   play_button):
 
     # При каждом переходе цикла отрисовывается новый экран с фоном
@@ -111,6 +111,9 @@ def update_screen(ai_settings, screen, stats, ship, aliens, bullets,
         bullet.draw_bullet()
     ship.blitme()
     aliens.draw(screen)
+
+    # Вывод счета
+    sb.show_score()
 
     # Кнопка "Play" отображается, когда игра неактивна
     if not stats.game_active:
