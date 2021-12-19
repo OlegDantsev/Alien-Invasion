@@ -1,4 +1,4 @@
-class GameStats():
+class GameStats:
 
     # отслеживание статистики для игры
     def __init__(self, ai_settings):
@@ -6,6 +6,9 @@ class GameStats():
         # Инициализирует статистику
         self.ai_settings = ai_settings
         self.reset_stats()
+
+        # Игра запускается в активном состоянии
+        self.game_active = True
 
     def reset_stats(self):
 

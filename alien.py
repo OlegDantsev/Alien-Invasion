@@ -24,7 +24,6 @@ class Alien(Sprite):
         # Сохранение позиции пришельца в float
         self.x = float(self.rect.x)
 
-
     def check_edges(self):
 
         # Возвращает True если пришелец находится у края экрана
@@ -34,14 +33,12 @@ class Alien(Sprite):
         if self.rect.left <= 0:
             return True
 
-
     def update(self):
 
         # Перемещает пришельца вправо и влево
         self.x += (self.ai_settings.alien_speed_factor *
                    self.ai_settings.fleet_direction)
         self.rect.x = self.x
-
 
     def blitme(self):
         # Выводит пришельца в текущем положении

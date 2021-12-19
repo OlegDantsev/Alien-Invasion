@@ -8,20 +8,22 @@ from time import sleep
 def ship_hit(ai_settings, stats, screen, ship, aliens, bullets):
 
     # Обрабатывает столкновение корабля с пришельцем
-    # Уменьшение ship_left
-    stats.ship_left = -1
+    if stats.ship_left > 0:
+        # Уменьшение ship_left
+        stats.ship_left = -1
 
-    # Очистка списка пришельцев и пуль
-    aliens.empty()
-    bullets.empty()
+        # Очистка списка пришельцев и пуль
+        aliens.empty()
+        bullets.empty()
 
-    # Создание нового флота и размещение корабля в центре
-    create_fleet(ai_settings, screen, ship, aliens)
-    ship.center_ship()
+        # Создание нового флота и размещение корабля в центре
+        create_fleet(ai_settings, screen, ship, aliens)
+        ship.center_ship()
 
-    # Пауза
-    sleep(0.5)
-
+        # Пауза
+        sleep(0.5)
+    else:
+        stats.game_active = False
 
 def check_keydown(event, ai_settings, screen, ship, bullets):
 
@@ -169,11 +171,24 @@ def change_fleet_direction(ai_settings, aliens):
     ai_settings.fleet_direction *= -1
 
 
+def check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets):
+
+    # Проверяет добрались ли пришельцы до нижней части экрана
+    screen_rect = screen.get_rect()
+    for alien in aliens.sprites():
+        if alien.rect.bottom >= screen_rect.bottom:
+            ship_hit(ai_settings, stats, screen, ship, aliens, bullets)
+            break
+
+
 def update_aliens(ai_settings, stats, screen, ship, aliens, bullets):
 
     # Проверяет достиг ли пришелец края экрана, после чего обновляет позицию
     check_fleet_edges(ai_settings, aliens)
     aliens.update()
+
+    # Проверка пришельцев добравшихся до нижнего края экрана
+    check_aliens_bottom(ai_settings, stats, screen, ship, aliens, bullets)
 
     # Проверка коллизий корабль-пришельцы
     if pygame.sprite.spritecollideany(ship, aliens):

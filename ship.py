@@ -40,7 +40,6 @@ class Ship:
         # Рисует корабль на текущей позиции
         self.screen.blit(self.image, self.rect)
 
-
     def center_ship(self):
 
         # Размещает корабль в центре
