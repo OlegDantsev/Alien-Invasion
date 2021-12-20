@@ -20,7 +20,7 @@ class Settings:
         self.bullets_allowed = 7
 
         # Параметры пришельцев
-        self.fleet_drop_speed = 10
+        self.fleet_drop_speed = 100
 
         # Темп ускорения игры
         self.speedup_scale = 1.1

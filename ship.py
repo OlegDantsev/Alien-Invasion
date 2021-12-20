@@ -1,11 +1,14 @@
 import pygame
+from pygame.sprite import Sprite
 
 
-class Ship:
 
-    def __init__(self, screen, ai_settings):
+class Ship(Sprite):
+
+    def __init__(self, ai_settings, screen,):
 
         # Inicialization ship and start position
+        super(Ship, self).__init__()
         self.screen = screen
 
         # Image download

@@ -22,7 +22,7 @@ def run_game():
     play_button = Button(ai_settings, screen, "Play")
 
     # Вывод коробля на экран
-    ship = Ship(screen, ai_settings)
+    ship = Ship(ai_settings, screen )
 
     # Создание группы для хранения пуль и пришельцев
     bullets = Group()
@@ -45,6 +45,7 @@ def run_game():
             ship.update()
             gf.update_bullet(ai_settings, screen, stats, sb, ship, aliens,
                              bullets)
-            gf.update_aliens(ai_settings, screen,  stats, ship, aliens, bullets)
+            gf.update_aliens(ai_settings, screen,  stats, sb, ship, aliens,
+                             bullets)
 
 run_game()
